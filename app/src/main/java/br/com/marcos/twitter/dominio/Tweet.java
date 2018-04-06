@@ -4,12 +4,13 @@ package br.com.marcos.twitter.dominio;
  * Created by Marcos on 17/03/18.
  */
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Classe de domínio que representa um Tweet
  */
-public class Tweet {
+public class Tweet implements Serializable{
 
     /**
      * Texto do Tweet
