@@ -73,10 +73,20 @@ public class TwitterActivity extends Activity {
      */
     private Tweet tweetSelecionado;
 
+    /**
+     * Usuário logado na aplicação
+     */
+    private String login;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter);
+
+        Intent telaLogin = getIntent();
+
+        login = telaLogin.getExtras().get(Tweet.TWEET_INFO).toString();
+
         if(savedInstanceState == null) {
             tweets = new ArrayList<>();
         }else{
@@ -222,7 +232,7 @@ public class TwitterActivity extends Activity {
      */
     public void tweetar(View view){
         EditText tweetText = findViewById(R.id.tweet);
-        Autor autor = new Autor("Autor", "email@email.com", "123456");
+        Autor autor = new Autor(login, "email@email.com", "123456");
         Tweet tweet = new Tweet(tweetText.getText().toString(), autor, new Date());
         tweets.add(tweet);
         tweetsAdapter.notifyDataSetChanged();

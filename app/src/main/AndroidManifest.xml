@@ -12,11 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
 
-        <activity android:name=".activities.TwitterActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.TwitterActivity">
         </activity>
 
         <activity android:name=".activities.DetalhesTweetActivity">
