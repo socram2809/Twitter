@@ -34,7 +34,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet>{
         TextView autor = convertView.findViewById(R.id.autor);
         TextView texto = convertView.findViewById(R.id.texto);
         TextView data = convertView.findViewById(R.id.data);
-        autor.setText("@" + tweet.getAutor());
+        autor.setText("@" + tweet.getAutor().getNome());
         texto.setText(tweet.getTexto());
         data.setText(tweet.getData().toGMTString());
         return convertView;

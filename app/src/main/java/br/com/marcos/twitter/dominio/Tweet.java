@@ -13,6 +13,11 @@ import java.util.Date;
 public class Tweet implements Serializable{
 
     /**
+     * Chave que identifica os detalhes dos tweets
+     */
+    public static final String TWEET_INFO = "TweetInfo";
+
+    /**
      * Texto do Tweet
      */
     private String texto;
@@ -20,7 +25,7 @@ public class Tweet implements Serializable{
     /**
      * Autor do Tweet
      */
-    private String autor;
+    private Autor autor;
 
     /**
      * Data de criação do Tweet
@@ -33,7 +38,7 @@ public class Tweet implements Serializable{
      * @param autor
      * @param data
      */
-    public Tweet(String texto, String autor, Date data) {
+    public Tweet(String texto, Autor autor, Date data) {
         this.texto = texto;
         this.autor = autor;
         this.data = data;
@@ -41,7 +46,7 @@ public class Tweet implements Serializable{
 
     @Override
     public String toString() {
-        return "@" + autor + "\n"
+        return "@" + autor.getNome() + "\n"
                 + texto + "\n"
                 + "Data: " + data.toGMTString();
     }
@@ -54,11 +59,11 @@ public class Tweet implements Serializable{
         this.texto = texto;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 

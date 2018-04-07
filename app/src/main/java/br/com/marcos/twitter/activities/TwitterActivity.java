@@ -1,6 +1,7 @@
 package br.com.marcos.twitter.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 import br.com.marcos.twitter.R;
 import br.com.marcos.twitter.adapters.TweetAdapter;
+import br.com.marcos.twitter.dominio.Autor;
 import br.com.marcos.twitter.dominio.Tweet;
 
 /**
@@ -50,17 +52,23 @@ public class TwitterActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Tweet tweetSelecionado = tweets.get(i);
 
-                Toast.makeText(getApplicationContext(), "Item Selecionado: " + tweetSelecionado, Toast.LENGTH_SHORT).show();
+                Intent detalhesTweet = new Intent(TwitterActivity.this, DetalhesTweetActivity.class);
+
+                detalhesTweet.putExtra(Tweet.TWEET_INFO, tweetSelecionado);
+
+                startActivity(detalhesTweet);
             }
         });
     }
 
     /**
      * Insere o tweet dentro do histórico
+     * @param view
      */
     public void tweetar(View view){
         EditText tweetText = findViewById(R.id.tweet);
-        Tweet tweet = new Tweet(tweetText.getText().toString(), "Autor", new Date());
+        Autor autor = new Autor("Autor", "email@email.com", "123456");
+        Tweet tweet = new Tweet(tweetText.getText().toString(), autor, new Date());
         tweets.add(tweet);
         tweetsAdapter.notifyDataSetChanged();
     }
