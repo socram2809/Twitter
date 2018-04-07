@@ -1,7 +1,6 @@
 package br.com.marcos.twitter.activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,17 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 import br.com.marcos.twitter.R;
-import br.com.marcos.twitter.adapters.TweetAdapter;
 import br.com.marcos.twitter.dominio.Tweet;
 
 /**
@@ -28,6 +19,8 @@ import br.com.marcos.twitter.dominio.Tweet;
  */
 
 public class DetalhesTweetActivity extends Activity {
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,19 +58,14 @@ public class DetalhesTweetActivity extends Activity {
      */
     public void telefonar(View view) {
         Intent ligar = new Intent(Intent.ACTION_CALL);
+        ligar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         TextView telefone = findViewById(R.id.telefone);
         ligar.setData(Uri.parse("tel:" + telefone.getText()));
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        startActivity(ligar);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, PERMISSION_REQUEST_CODE);
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+            startActivity(ligar);
     }
 }

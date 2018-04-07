@@ -18,6 +18,11 @@ public class Tweet implements Serializable{
     public static final String TWEET_INFO = "TweetInfo";
 
     /**
+     * Chave que identifica a edição de tweets
+     */
+    public static final String TWEET_EDIT = "TweetEdicao";
+
+    /**
      * Texto do Tweet
      */
     private String texto;
